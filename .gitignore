@@ -22,3 +22,7 @@ SENTENCE/split_temp/
 src/MIA_Libraries_CY/KyokoLoggingkun.c
 
 *.pyd
+
+src/MIA_Libraries_CY/Face_Process.c
+
+src/MIA_Libraries_CY/FACEmod.c

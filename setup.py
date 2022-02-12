@@ -16,6 +16,15 @@ setup(
         Extension(
             "MIA_Libraries_CY.KyokoLoggingkun",
             sources=["src/MIA_Libraries_CY/KyokoLoggingkun.pyx"]
+        ),
+
+        Extension(
+            "MIA_Libraries_CY.Face_Process",
+            sources=["src/MIA_Libraries_CY/Face_Process.pyx"]
+        ),
+        Extension(
+            "MIA_Libraries_CY.FACEmod",
+            sources=["src/MIA_Libraries_CY/FACEmod.pyx"]
         )
-    ])
+    ],compiler_directives={'language_level' : "3"})
 )
