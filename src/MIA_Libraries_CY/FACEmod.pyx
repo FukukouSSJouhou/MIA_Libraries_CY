@@ -77,7 +77,7 @@ class Main_process:
         #print(self.video_path,"-"*20)
         capture = cv2.VideoCapture(self.video_path)
         fps = capture.get(cv2.CAP_PROP_FPS)
-        self.loggingobj.normalout(fps)
+        self.loggingobj.normalout(str(fps))
 
         getsec=0
         self.facepoint=[]
@@ -89,7 +89,7 @@ class Main_process:
         self.hantei=0# target画像の処理を行ったかの判定変数
 
         # 各秒数の画像を処理
-        self.loggingobj.normalout(math.floor(self.endtime))
+        self.loggingobj.normalout(str(math.floor(self.endtime)))
         while getsec <= math.floor(self.endtime):
             # set the time
             capture.set(cv2.CAP_PROP_POS_FRAMES, round(fps*getsec))
