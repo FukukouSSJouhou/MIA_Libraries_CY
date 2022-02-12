@@ -18,3 +18,7 @@ validation/
 train/
 models/
 SENTENCE/split_temp/
+
+src/MIA_Libraries_CY/KyokoLoggingkun.c
+
+*.pyd
