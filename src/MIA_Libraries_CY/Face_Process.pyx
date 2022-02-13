@@ -14,8 +14,12 @@ from PIL import Image, ImageTk
 from . import FACEmod
 from . import KyokoLoggingkun
 
-
-cdef str path_cutext(pathkun:str):
+cdef float get_playtime(voicefile:str):
+        with wave.open(voicefile, "rb") as wr:
+            fr = wr.getframerate()
+            fn = wr.getnframes()
+            return 1.0 * fn / fr
+def path_cutext(pathkun:str):
     pathkun22, extkun = os.path.splitext(os.path.basename(pathkun))
     return pathkun22
 
@@ -35,8 +39,8 @@ class Face_Process():
         :type screen_h:int
         """
         self.hantei = None
-        self.voicefile = None
-        self.imgDIR_NAME = None
+        self.voicefile:str = None
+        self.imgDIR_NAME:str = None
         self.endtime = None
         self.screen_w:int=screen_w
         self.screen_h:int=screen_h
@@ -52,7 +56,7 @@ class Face_Process():
         self.loggingobj.normalout("Processing movie file :" + self.filename)
         self.Make_audio()
         self.loggingobj.successout("Generated Wav File.")
-        self.endtime = self.get_playtime()
+        self.endtime = get_playtime(self.voicefile)
         self.loggingobj.successout("The length of the video / audio file has been confirmed: {}".format(self.endtime))
         return self.endtime,self.voicefile
     def process(self):
@@ -63,7 +67,7 @@ class Face_Process():
         self.loggingobj.normalout("Processing movie file :" + self.filename)
         self.Make_audio()
         self.loggingobj.successout("Generated Wav File.")
-        self.endtime = self.get_playtime()
+        self.endtime = get_playtime(self.voicefile)
         self.loggingobj.successout("The length of the video / audio file has been confirmed: {}".format(self.endtime))
         self.target_img_select()
         self.loggingobj.successout("Saved Target Picture..")
@@ -79,18 +83,11 @@ class Face_Process():
         self.loggingobj.successout("Exported Faceemomemo!")
         return FACEemomemo, FACEpointmemo,self.endtime,self.voicefile
     def Make_audio(self):
-        dir = "./_audio/"
+        dir:str = "./_audio/"
         if not os.path.exists(dir):
             os.makedirs(dir)
-        self.voicefile = dir + self.path_ONLY + ".wav"
+        self.voicefile:str = dir + self.path_ONLY + ".wav"
         resp = subprocess.check_output(["ffmpeg", "-y", "-i", self.filename, self.voicefile], shell=False)
-
-    def get_playtime(self):
-        with wave.open(self.voicefile, "rb") as wr:
-            fr = wr.getframerate()
-            fn = wr.getnframes()
-            return 1.0 * fn / fr
-
     def target_img_select(self):
         self.imgDIR_NAME = './FACE/temp_img/img_' + self.path_ONLY
         if not os.path.exists(self.imgDIR_NAME):

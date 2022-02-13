@@ -13,13 +13,30 @@ import math
 from . import KyokoLoggingkun
 
 
-class Main_process:
-    def __init__(self, video_path, pertime, video_path_ONLY, endtime,loggingobj:KyokoLoggingkun):
-        self.video_path=video_path
-        self.pertime=pertime
-        self.video_path_ONLY=video_path_ONLY
-        self.endtime = endtime
-        self.loggingobj=loggingobj
+cdef class Main_process:
+    cdef str video_path
+    cdef int pertime
+    cdef str video_path_ONLY
+    cdef float endtime
+    cdef object loggingobj
+    cdef object emotions_XCEPTION
+    cdef list timeemos
+    cdef str imgDIR_NAME
+    cdef list facepoint
+    cdef int hantei
+    cdef object front_face_list
+    cdef str save_path
+    cdef object img
+    cdef int i
+    cdef object target_img
+    cdef int most_similar_index
+    def __cinit__(self, video_path2:str, pertime2:int, video_path_ONLY2:str, endtime2:float,loggingobj2:KyokoLoggingkun):
+
+        self.video_path=video_path2
+        self.pertime=pertime2
+        self.video_path_ONLY=video_path_ONLY2
+        self.endtime = endtime2
+        self.loggingobj=loggingobj2
 
         model_path = './FACE/models/5face_emotions_100ep.hdf5'
         self.emotions_XCEPTION = load_model(model_path, compile=False)
