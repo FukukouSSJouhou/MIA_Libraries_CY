@@ -26,3 +26,5 @@ src/MIA_Libraries_CY/KyokoLoggingkun.c
 src/MIA_Libraries_CY/Face_Process.c
 
 src/MIA_Libraries_CY/FACEmod.c
+
+src/mia_libraries_cy.egg-info/
