@@ -7,7 +7,7 @@ def _requires_from_file(filename):
     return open(filename).read().splitlines()
 setup(
     name='mia_libraries_cy',
-    version='0.0.0.1',
+    version='0.0.0.2',
     license='MIT',
     description='mia_libraries_cy',
     author='fukukoussjouhou',

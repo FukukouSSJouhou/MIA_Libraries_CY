@@ -54,7 +54,8 @@ cdef class Main_process:
         if not os.path.exists('./FACE/emomemo/'):
             os.makedirs('./FACE/emomemo/')
 
-    def detect_emotion(self, index):
+    def detect_emotion(self, index:int):
+        cdef str face_path
         try:
             face_path = self.imgDIR_NAME+'/sec'+str(index)+'.jpg'
             img_detecting = image.load_img(face_path, grayscale=True , target_size=(48, 48))
@@ -74,6 +75,7 @@ cdef class Main_process:
         return emos
 
     def Write_to_textfile(self):
+        cdef str txtfile
         # 感情値保存
         txtfile = './FACE/emomemo/'+self.video_path_ONLY+'.txt'
         f = open(txtfile, 'w')
@@ -95,6 +97,7 @@ cdef class Main_process:
         capture = cv2.VideoCapture(self.video_path)
         fps = capture.get(cv2.CAP_PROP_FPS)
         self.loggingobj.normalout(str(fps))
+        cdef str txtfile2
 
         getsec=0
         self.facepoint=[]
@@ -178,7 +181,7 @@ cdef class Main_process:
         return txtfile2
     #---------------------------------------------------------
     # 類似度の算出
-    def similarity(self):
+    cdef void similarity(self):
         self.hantei=1# 類似度の判定を実行したため変数を1に変更
 
         #img_size = (200, 200)
