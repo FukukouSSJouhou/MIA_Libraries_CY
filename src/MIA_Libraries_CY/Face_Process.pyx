@@ -15,22 +15,34 @@ from . import FACEmod
 from . import KyokoLoggingkun
 
 
-def path_cutext(pathkun):
+cdef str path_cutext(pathkun:str):
     pathkun22, extkun = os.path.splitext(os.path.basename(pathkun))
     return pathkun22
 
 
 class Face_Process():
-    def __init__(self, filename, timedouga, loggingobj:KyokoLoggingkun,screen_w,screen_h):
+    def __init__(self, filename:str, timedouga:int, loggingobj:KyokoLoggingkun,screen_w:int,screen_h:int):
+        """constructor
+        :param filename:filename
+        :type filename:str
+        :param timedouga: split time
+        :type timedouga:int
+        :param loggingobj: logging tool
+        :type loggingobj:KyokoLoggingkun
+        :param screen_w: screen width
+        :type screen_w:int
+        :param screen_h: screen height
+        :type screen_h:int
+        """
         self.hantei = None
         self.voicefile = None
         self.imgDIR_NAME = None
         self.endtime = None
-        self.screen_w=screen_w
-        self.screen_h=screen_h
-        self.filename = filename
-        self.pertime = int(timedouga)
-        self.loggingobj = loggingobj
+        self.screen_w:int=screen_w
+        self.screen_h:int=screen_h
+        self.filename:str = filename
+        self.pertime:int = timedouga
+        self.loggingobj:KyokoLoggingkun = loggingobj
         self.path_ONLY = path_cutext(self.filename)
     def process_onlyaudio(self):
         self.loggingobj.normalout("<< (Only Audio) >>")
